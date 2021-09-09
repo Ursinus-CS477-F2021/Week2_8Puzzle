@@ -58,8 +58,32 @@ class State:
             A list of the neighboring states
         """
         N = len(self.tiles)
+        # Find empty element
+        i = 0
+        j = 0
+        found = False
+        while not found and i < N:
+            if j < N:
+                if self.tiles[i][j] == " ":
+                    found = True
+                else:
+                    j += 1
+            else:
+                i += 1
+                j = 0
+        # Enumerate all neighbors around the empty element
+        # by seeing if there's a valid swap to be made below,
+        # above, to the left, and to the right
         neighbs = []
-        ## TODO: Fill this in
+        for (di, dj) in [(-1, 0), (1, 0), (0, -1), (0, 1)]:
+            i2 = i + di
+            j2 = j + dj
+            if i2 >= 0 and i2 < N and j2 >= 0 and j2 < N:
+                # Be sure to make a deep copy of the board before swapping
+                s = self.copy() 
+                # Here's a nifty python way to swap two elements in an array
+                s.tiles[i][j], s.tiles[i2][j2] = s.tiles[i2][j2], s.tiles[i][j]
+                neighbs.append(s)
         return neighbs
     
     def solve(self):

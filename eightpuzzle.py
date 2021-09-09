@@ -45,7 +45,14 @@ class State:
         """
         res = True
         N = len(self.tiles)
-        ## TODO: Fill this in
+        count = 0
+        for i in range(N):
+            for j in range(N):
+                if self.tiles[i][j] != " ":
+                    if self.tiles[i][j] == count:
+                        count += 1
+                    else:
+                        res = False
         return res
 
     def get_neighbs(self):

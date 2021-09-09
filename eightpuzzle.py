@@ -43,9 +43,20 @@ class State:
         -------
         True if this is a goal state, False otherwise
         """
-        res = True
         N = len(self.tiles)
-        ## TODO: Fill this in
+        # Step 1: Create a new 1D list with the elements
+        # in row major order
+        rowmajor = []
+        for i in range(N):
+            for j in range(N):
+                if self.tiles[i][j] != " ":
+                    rowmajor.append(self.tiles[i][j])
+        # Step 2: If a single pair of elements is out of order
+        # then this isn't a goal state
+        res = True
+        for i in range(len(rowmajor)-1):
+            if rowmajor[i+1] < rowmajor[i]:
+                res = False
         return res
 
     def get_neighbs(self):

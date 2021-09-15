@@ -60,6 +60,32 @@ class State:
         N = len(self.tiles)
         neighbs = []
         ## TODO: Fill this in
+        for i, row in enumerate(self.tiles):
+            for j, el in enumerate(row):
+                if i < N-1:
+                    if self.tiles[i+1][j] == " ":
+                        copy = self.copy()
+                        copy.tiles[i+1][j] = el
+                        copy.tiles[i][j] = " "
+                        neighbs.append(copy)
+                if i > 0:
+                    if self.tiles[i-1][j] == " ":
+                        copy = self.copy()
+                        copy.tiles[i-1][j] = el
+                        copy.tiles[i][j] = " "   
+                        neighbs.append(copy)
+                if j < N-1:
+                    if self.tiles[i][j+1] == " ":
+                        copy = self.copy()
+                        copy.tiles[i][j+1] = el
+                        copy.tiles[i][j] = " "
+                        neighbs.append(copy)
+                if j > 0:
+                    if self.tiles[i][j-1] == " ":
+                        copy = self.copy()
+                        copy.tiles[i][j-1] = el
+                        copy.tiles[i][j] = " "
+                        neighbs.append(copy)
         return neighbs
     
     def solve(self):
